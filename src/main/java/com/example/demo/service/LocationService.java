@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.Accommodation;
 import com.example.demo.domain.Location;
 import com.example.demo.dto.request.LocationRequestDto;
 import com.example.demo.dto.response.LocationResponseDto;

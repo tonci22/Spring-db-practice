@@ -2,7 +2,6 @@ package com.example.demo.service.Implementation;
 
 import com.example.demo.domain.Accommodation;
 import com.example.demo.dto.request.AccommodationRequestDto;
-import com.example.demo.dto.request.LocationRequestDto;
 import com.example.demo.dto.response.AccommodationResponseDto;
 import com.example.demo.exception.RepositoryNotFoundException;
 import com.example.demo.mapper.AccommodationMapper;

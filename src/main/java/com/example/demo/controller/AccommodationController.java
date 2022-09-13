@@ -1,12 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.request.AccommodationRequestDto;
-import com.example.demo.dto.request.LocationRequestDto;
 import com.example.demo.dto.response.AccommodationResponseDto;
-import com.example.demo.dto.response.LocationResponseDto;
 import com.example.demo.mapper.AccommodationMapper;
 import com.example.demo.service.AccommodationService;
-import com.example.demo.service.LocationService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
