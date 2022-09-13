@@ -31,7 +31,8 @@ private final LocationService locationService;
 	public void initData(){
 
 		LocationRequestDto location = new LocationRequestDto();
-		location.setPostalCode(1233);
+		location.setPostalCode(20263);
+		location.setTitle("Lumbarda");
 		location.setId(1L);
 		locationService.add(location);
 

@@ -11,5 +11,6 @@ import java.util.List;
 public class LocationRequestDto {
     private Long id;
     private Integer postalCode;
+    private String title;
     private List<AccommodationRequestDto> accommodations = new ArrayList<>();
 }

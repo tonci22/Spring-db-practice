@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"postalCode"})})
 public class Location {
 
     @Id
@@ -17,6 +18,8 @@ public class Location {
     private Long id;
 
     private Integer postalCode;
+
+    private String title;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Accommodation> accommodations;

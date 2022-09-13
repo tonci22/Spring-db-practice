@@ -8,4 +8,5 @@ import lombok.Setter;
 public class LocationResponseDto {
     private Long id;
     private Integer postalCode;
+    private String title;
 }
