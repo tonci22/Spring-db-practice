@@ -2,6 +2,7 @@ package com.example.demo.domain;
 
 import com.example.demo.enums.AccommodationType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 public class Accommodation extends AccommodationLocation {
 
@@ -21,7 +23,7 @@ public class Accommodation extends AccommodationLocation {
     @Min(1)
     private Integer personCount;
     private Byte[] image;
-    private boolean freeCancelation = true;
+    private boolean freeCancellation = true;
     @NotNull
     private double price;
     private AccommodationType type;

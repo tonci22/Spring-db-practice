@@ -44,7 +44,7 @@ public class ApplicationStart {
         accommodation.setTitle("titl");
         accommodation.setSubtitle("subtitl");
         accommodation.setCategorization(1);
-        accommodation.setFreeCancelation(false);
+        accommodation.setFreeCancellation(false);
         accommodation.setImage(new Byte[]{2, 31, 55, 99});
         accommodation.setPrice(9999);
         accommodation.setPersonCount(12);
