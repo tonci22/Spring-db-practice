@@ -9,10 +9,13 @@ import com.example.demo.repository.AccommodationRepository;
 import com.example.demo.service.AccommodationService;
 import com.example.demo.service.LocationService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Primary
 @Service
 public class AccommodationServiceImpl implements AccommodationService {
 
@@ -36,7 +39,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
         Accommodation accommodation = accommodationMapper.mapToDto(accommodationRequestDto);
 
-        if(locationService.getById(accommodationRequestDto.getLocation().getId()) == null)
+        if(!locationService.getById(accommodationRequestDto.getLocation().getId()))
             locationService.add(accommodationRequestDto.getLocation());
 
         return accommodationMapper.mapToDto(accommodationRepository.save(accommodation));
@@ -51,6 +54,10 @@ public class AccommodationServiceImpl implements AccommodationService {
     public AccommodationResponseDto update(Long id, AccommodationRequestDto accommodationRequestDto) {
 
         accommodationRepository.findById(id).orElseThrow(() -> new RepositoryNotFoundException("Accommodation ID not found"));
+
+        if(!locationService.getById(accommodationRequestDto.getLocation().getId()))
+            throw new DataIntegrityViolationException("Location ID not found");
+
         Accommodation accommodation = accommodationMapper.mapToDto(accommodationRequestDto);
         accommodation.setId(id);
 

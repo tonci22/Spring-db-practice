@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class AccommodationRequestDto {
     private Long id;
+    private String title;
+    private String subtitle;
     private Integer categorization;
     private Integer personCount;
     private Byte[] image;

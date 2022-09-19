@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class LocationResponseDto {
     private Long id;
-    private Integer postalCode;
     private String title;
+    private String subtitle;
+    private Integer postalCode;
 }

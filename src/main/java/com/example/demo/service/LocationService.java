@@ -14,7 +14,7 @@ public interface LocationService {
 
     LocationResponseDto update(Long id, LocationRequestDto location);
 
-    Location getById(Long id);
+    boolean getById(Long id);
 
     void deleteById(Long id);
 }
