@@ -13,7 +13,7 @@ public class AccommodationRequestDto {
     private Integer categorization;
     private Integer personCount;
     private Byte[] image;
-    private boolean freeCancelation = true;
+    private boolean freeCancellation = true;
     private double price;
     private AccommodationType type;
     private LocationRequestDto location;
