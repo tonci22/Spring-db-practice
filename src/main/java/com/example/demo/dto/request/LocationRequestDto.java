@@ -10,7 +10,8 @@ import java.util.List;
 @Setter
 public class LocationRequestDto {
     private Long id;
-    private Integer postalCode;
     private String title;
+    private String subtitle;
+    private Integer postalCode;
     private List<AccommodationRequestDto> accommodations = new ArrayList<>();
 }

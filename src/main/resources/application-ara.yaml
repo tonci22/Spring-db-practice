@@ -1,0 +1,6 @@
+accommodation:
+  ownerValue: ownerYAML
+  owner:
+    name: nameYAML
+    facebook: facebookYAML
+    instagram: instagramAML

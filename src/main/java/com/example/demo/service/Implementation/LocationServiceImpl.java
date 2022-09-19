@@ -38,20 +38,20 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public LocationResponseDto update(Long id, LocationRequestDto locationRequestDto) {
 
-        Location location = locationRepository.findById(id).orElseThrow(() -> new RepositoryNotFoundException("Location ID not found"));
+        locationRepository.findById(id).orElseThrow(() -> new RepositoryNotFoundException("Location ID not found"));
 
-        location.setPostalCode(locationRequestDto.getPostalCode());
+        Location location = locationMapper.mapToDto(locationRequestDto);
+        location.setId(id);
+
         locationRepository.save(location);
 
         return locationMapper.mapToDto(location);
     }
 
     @Override
-    public Location getById(Long id) {
-        if(locationRepository.findById(id).isPresent())
-            return locationRepository.findById(id).get();
-        else
-            return null;
+    public boolean getById(Long id) {
+        return locationRepository.findById(id).isPresent();
+
     }
 
     @Override

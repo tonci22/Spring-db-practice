@@ -33,6 +33,11 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(locationService.add(locationRequestDto));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<LocationResponseDto> updateLocation(@PathVariable("id") Long id, @RequestBody LocationRequestDto locationRequestDto){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(locationService.update(id, locationRequestDto));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteLocation(@PathVariable("id") Long id){
         locationService.deleteById(id);
