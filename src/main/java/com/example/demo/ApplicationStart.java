@@ -3,14 +3,19 @@ package com.example.demo;
 import com.example.demo.configuration.AccommodationOwner;
 import com.example.demo.dto.request.AccommodationRequestDto;
 import com.example.demo.dto.request.LocationRequestDto;
+import com.example.demo.dto.request.ReservationRequestDto;
 import com.example.demo.enums.AccommodationType;
+import com.example.demo.enums.ReservationType;
 import com.example.demo.service.AccommodationService;
 import com.example.demo.service.LocationService;
+import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @SpringBootApplication
 public class ApplicationStart {
@@ -18,13 +23,18 @@ public class ApplicationStart {
     private final AccommodationService accommodationService;
     private final LocationService locationService;
 	private final AccommodationOwner accommodationOwner;
+    private final ReservationService reservationService;
 
     public ApplicationStart(@Qualifier("accommodationServiceImpl") final AccommodationService accommodationService,
-                            @Qualifier("locationServiceImpl") LocationService locationService, AccommodationOwner accommodationOwner) {
+                            @Qualifier("locationServiceImpl") final LocationService locationService,
+                            final AccommodationOwner accommodationOwner,
+                            @Qualifier("reservationServiceImpl") final ReservationService reservationService) {
+
         this.accommodationService = accommodationService;
         this.locationService = locationService;
 		this.accommodationOwner = accommodationOwner;
-	}
+        this.reservationService = reservationService;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(ApplicationStart.class, args);
@@ -41,6 +51,7 @@ public class ApplicationStart {
         locationService.add(location);
 
         AccommodationRequestDto accommodation = new AccommodationRequestDto();
+        accommodation.setId(1L);
         accommodation.setTitle("titl");
         accommodation.setSubtitle("subtitl");
         accommodation.setCategorization(1);
@@ -52,6 +63,16 @@ public class ApplicationStart {
         accommodation.setLocation(location);
 
         accommodationService.add(accommodation);
+
+        ReservationRequestDto reservationRequestDto = new ReservationRequestDto();
+        reservationRequestDto.setAccommodation(accommodation);
+        reservationRequestDto.setReservationType(ReservationType.TEST);
+        reservationRequestDto.setSubmitted(true);
+        reservationRequestDto.setCheckIn(new Timestamp(new Date().getTime() - 2342734342L));
+        reservationRequestDto.setCheckOut(new Timestamp(new Date().getTime()));
+        reservationRequestDto.setPersonsCount(3);
+
+        reservationService.add(reservationRequestDto);
 
 		System.out.println(accommodationOwner);
     }

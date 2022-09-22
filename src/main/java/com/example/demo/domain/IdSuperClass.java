@@ -13,6 +13,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class IdSuperClass {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 }
