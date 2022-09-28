@@ -1,14 +1,17 @@
 package com.example.demo.domain;
 
 import com.example.demo.enums.ReservationType;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
 public class Reservation extends IdSuperClass {
@@ -22,7 +25,7 @@ public class Reservation extends IdSuperClass {
     @ManyToOne
     private Accommodation accommodation;
 
-    public Reservation() {
-        accommodation = new Accommodation();
-    }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "FK_reservation_id")
+    private List<ReservationHistory> reservationHistories = new ArrayList<>();
 }
