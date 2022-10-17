@@ -54,11 +54,11 @@ public class ApplicationStart {
         accommodation.setId(1L);
         accommodation.setTitle("titl");
         accommodation.setSubtitle("subtitl");
-        accommodation.setCategorization(1);
+        accommodation.setCategorization(3);
         accommodation.setFreeCancellation(false);
         accommodation.setImage(new Byte[]{2, 31, 55, 99});
         accommodation.setPrice(9999);
-        accommodation.setPersonCount(12);
+        accommodation.setPersonCount(6);
         accommodation.setType(AccommodationType.APARTMENT);
         accommodation.setLocation(location);
 
@@ -75,5 +75,6 @@ public class ApplicationStart {
         reservationService.add(reservationRequestDto);
 
 		System.out.println(accommodationOwner);
+        accommodationService.getByCategorizationEqualsAndPersonCountGreaterThanEqual(3, 5).forEach(System.out::println);
     }
 }

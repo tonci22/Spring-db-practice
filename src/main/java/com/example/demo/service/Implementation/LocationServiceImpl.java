@@ -23,8 +23,8 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public List<Location> getAll() {
-        return locationRepository.findAll();
+    public List<LocationResponseDto> getAll() {
+        return locationMapper.mapToDto(locationRepository.findAll());
     }
 
     @Override

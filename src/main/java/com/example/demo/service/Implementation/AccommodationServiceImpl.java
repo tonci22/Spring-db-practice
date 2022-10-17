@@ -46,8 +46,8 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public List<Accommodation> getAll() {
-        return accommodationRepository.findAll();
+    public List<AccommodationResponseDto> getAll() {
+        return accommodationMapper.mapToDto(accommodationRepository.findAll());
     }
 
     @Override
@@ -68,5 +68,10 @@ public class AccommodationServiceImpl implements AccommodationService {
     public void deleteById(Long id) {
         accommodationRepository.findById(id).orElseThrow(() -> new RepositoryNotFoundException("Accommodation ID not found"));
         accommodationRepository.deleteById(id);
+    }
+
+    @Override
+    public List<AccommodationResponseDto> getByCategorizationEqualsAndPersonCountGreaterThanEqual(Integer stars, Integer minimumBeds) {
+        return accommodationMapper.mapToDto(accommodationRepository.findByCategorizationEqualsAndPersonCountGreaterThanEqual(stars, minimumBeds));
     }
 }

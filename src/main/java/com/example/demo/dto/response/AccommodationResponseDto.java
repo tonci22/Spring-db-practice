@@ -3,9 +3,11 @@ package com.example.demo.dto.response;
 import com.example.demo.enums.AccommodationType;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class AccommodationResponseDto {
     private Long id;
     private String title;

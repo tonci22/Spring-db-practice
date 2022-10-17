@@ -27,7 +27,7 @@ public class AccommodationController {
 
     @GetMapping
     public ResponseEntity<List<AccommodationResponseDto>> getAllAccommodations(){
-        return ResponseEntity.status(HttpStatus.OK).body(accommodationMapper.mapToDtoResponse(accommodationService.getAll()));
+        return ResponseEntity.status(HttpStatus.OK).body(accommodationService.getAll());
     }
 
 

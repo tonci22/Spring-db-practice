@@ -25,7 +25,7 @@ public class LocationController {
 
     @GetMapping
     public ResponseEntity<List<LocationResponseDto>> getAllLocations() {
-        return ResponseEntity.status(HttpStatus.OK).body(locationMapper.mapToDto(locationService.getAll()));
+        return ResponseEntity.status(HttpStatus.OK).body(locationService.getAll());
     }
 
     @PostMapping

@@ -1,6 +1,5 @@
 package com.example.demo.service.Implementation;
 
-import com.example.demo.domain.Accommodation;
 import com.example.demo.dto.request.AccommodationRequestDto;
 import com.example.demo.dto.response.AccommodationResponseDto;
 import com.example.demo.service.AccommodationService;
@@ -14,7 +13,7 @@ public class RoomAccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public List<Accommodation> getAll() {
+    public List<AccommodationResponseDto> getAll() {
         return null;
     }
 
@@ -26,5 +25,10 @@ public class RoomAccommodationServiceImpl implements AccommodationService {
     @Override
     public void deleteById(Long id) {
 
+    }
+
+    @Override
+    public List<AccommodationResponseDto> getByCategorizationEqualsAndPersonCountGreaterThanEqual(Integer stars, Integer minimumBeds) {
+        return null;
     }
 }
