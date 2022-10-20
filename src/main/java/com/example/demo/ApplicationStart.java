@@ -9,6 +9,9 @@ import com.example.demo.enums.ReservationType;
 import com.example.demo.service.AccommodationService;
 import com.example.demo.service.LocationService;
 import com.example.demo.service.ReservationService;
+import org.apache.logging.slf4j.SLF4JLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,6 +27,7 @@ public class ApplicationStart {
     private final LocationService locationService;
 	private final AccommodationOwner accommodationOwner;
     private final ReservationService reservationService;
+    private static final Logger logger = LoggerFactory.getLogger(SLF4JLogger.class);
 
     public ApplicationStart(@Qualifier("accommodationServiceImpl") final AccommodationService accommodationService,
                             @Qualifier("locationServiceImpl") final LocationService locationService,
@@ -75,6 +79,7 @@ public class ApplicationStart {
         reservationService.add(reservationRequestDto);
 
 		System.out.println(accommodationOwner);
-        accommodationService.getByCategorizationEqualsAndPersonCountGreaterThanEqual(3, 5).forEach(System.out::println);
+        accommodationService.getCategorizationAndMinimumBeds(3, 5).forEach(System.out::println);
+        logger.debug("debug string");
     }
 }

@@ -28,7 +28,13 @@ public class RoomAccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public List<AccommodationResponseDto> getByCategorizationEqualsAndPersonCountGreaterThanEqual(Integer stars, Integer minimumBeds) {
+    public List<AccommodationResponseDto> getCategorizationAndMinimumBeds(Integer stars, Integer minimumBeds) {
         return null;
     }
+
+    @Override
+    public List<AccommodationResponseDto> getShuffledAccommodations() {
+        return null;
+    }
+
 }

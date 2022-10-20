@@ -1,5 +1,6 @@
 package com.example.demo.service.Implementation;
 
+import com.example.demo.POJO.AccommodationShuffle;
 import com.example.demo.domain.Accommodation;
 import com.example.demo.dto.request.AccommodationRequestDto;
 import com.example.demo.dto.response.AccommodationResponseDto;
@@ -71,7 +72,12 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public List<AccommodationResponseDto> getByCategorizationEqualsAndPersonCountGreaterThanEqual(Integer stars, Integer minimumBeds) {
+    public List<AccommodationResponseDto> getCategorizationAndMinimumBeds(Integer stars, Integer minimumBeds) {
         return accommodationMapper.mapToDto(accommodationRepository.findByCategorizationEqualsAndPersonCountGreaterThanEqual(stars, minimumBeds));
+    }
+
+    @Override
+    public List<AccommodationResponseDto> getShuffledAccommodations() {
+        return AccommodationShuffle.getAccommodationsShuffled(accommodationMapper.mapToDto(accommodationRepository.findAll()));
     }
 }

@@ -11,6 +11,6 @@ public interface AccommodationService {
     List<AccommodationResponseDto> getAll();
     AccommodationResponseDto update(Long id, AccommodationRequestDto accommodationRequestDto);
     void deleteById(Long id);
-
-    List<AccommodationResponseDto> getByCategorizationEqualsAndPersonCountGreaterThanEqual(Integer stars, Integer minimumBeds);
+    List<AccommodationResponseDto> getCategorizationAndMinimumBeds(Integer stars, Integer minimumBeds);
+    List<AccommodationResponseDto> getShuffledAccommodations();
 }
