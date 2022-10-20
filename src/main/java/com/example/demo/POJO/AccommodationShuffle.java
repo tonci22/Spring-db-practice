@@ -10,12 +10,7 @@ public class AccommodationShuffle {
         if(accommodations.size() < 10)
             return null;
 
-        Set<AccommodationResponseDto> shuffledAccommodations = new HashSet<>();
-        Random random = new Random();
-
-        while (shuffledAccommodations.size() < 10){
-            shuffledAccommodations.add(accommodations.get(random.nextInt(accommodations.size())));
-        }
+        Set<AccommodationResponseDto> shuffledAccommodations = new HashSet<>(accommodations);
 
         return new ArrayList<>(shuffledAccommodations);
     }
