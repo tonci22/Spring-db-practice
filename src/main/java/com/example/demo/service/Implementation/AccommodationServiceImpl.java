@@ -1,6 +1,5 @@
 package com.example.demo.service.Implementation;
 
-import com.example.demo.POJO.AccommodationShuffle;
 import com.example.demo.domain.Accommodation;
 import com.example.demo.dto.request.AccommodationRequestDto;
 import com.example.demo.dto.response.AccommodationResponseDto;
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Primary
 @Service
@@ -78,6 +77,17 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     public List<AccommodationResponseDto> getShuffledAccommodations() {
-        return AccommodationShuffle.getAccommodationsShuffled(accommodationMapper.mapToDto(accommodationRepository.findAll()));
+
+        Set<AccommodationResponseDto> shuffledAccommodations = new HashSet<>();
+        Random random = new Random();
+
+        while (shuffledAccommodations.size() < 10){
+            AccommodationResponseDto randomAccommodation = accommodationMapper.mapToDto(accommodationRepository
+                    .findAll().get(random.nextInt(accommodationRepository.findAll().size())));
+
+            shuffledAccommodations.add(randomAccommodation);
+        }
+
+        return new ArrayList<>(shuffledAccommodations);
     }
 }
