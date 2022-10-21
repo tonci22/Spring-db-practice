@@ -39,6 +39,10 @@ public class AccommodationController {
         return ResponseEntity.status(HttpStatus.OK).body(accommodationService.getShuffledAccommodations());
     }
 
+    @GetMapping("/location")
+    public ResponseEntity<List<AccommodationResponseDto>> getAccommodationsFromLocationId(@RequestParam Long locationId){
+        return ResponseEntity.status(HttpStatus.OK).body(accommodationService.getAccommodationsFromLocationId(locationId));
+    }
 
     @PostMapping
     public ResponseEntity<AccommodationResponseDto> addAccommodation(@RequestBody AccommodationRequestDto accommodationRequestDto){

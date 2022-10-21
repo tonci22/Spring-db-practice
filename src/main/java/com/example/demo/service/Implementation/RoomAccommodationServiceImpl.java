@@ -37,4 +37,9 @@ public class RoomAccommodationServiceImpl implements AccommodationService {
         return null;
     }
 
+    @Override
+    public List<AccommodationResponseDto> getAccommodationsFromLocationId(Long id) {
+        return null;
+    }
+
 }

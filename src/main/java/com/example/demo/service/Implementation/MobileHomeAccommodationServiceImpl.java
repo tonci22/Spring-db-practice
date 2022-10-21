@@ -36,4 +36,9 @@ public class MobileHomeAccommodationServiceImpl implements AccommodationService 
     public List<AccommodationResponseDto> getShuffledAccommodations() {
         return null;
     }
+
+    @Override
+    public List<AccommodationResponseDto> getAccommodationsFromLocationId(Long id) {
+        return null;
+    }
 }

@@ -2,13 +2,17 @@ package com.example.demo.service.Implementation;
 
 import com.example.demo.domain.Location;
 import com.example.demo.dto.request.LocationRequestDto;
+import com.example.demo.dto.response.AccommodationResponseDto;
 import com.example.demo.dto.response.LocationResponseDto;
 import com.example.demo.exception.RepositoryNotFoundException;
+import com.example.demo.mapper.AccommodationMapper;
+import com.example.demo.mapper.AccommodationMapperImpl;
 import com.example.demo.mapper.LocationMapper;
 import com.example.demo.repository.LocationRepository;
 import com.example.demo.service.LocationService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,9 +53,19 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public boolean getById(Long id) {
+    public boolean idIsPresent(Long id) {
         return locationRepository.findById(id).isPresent();
+    }
 
+    @Override
+    public List<AccommodationResponseDto> getAccommodationsByLocationId(Long id) {
+
+        final AccommodationMapper accommodationMapper = new AccommodationMapperImpl();
+
+        return new ArrayList<>(accommodationMapper
+                .mapToDto(locationRepository.findById(id)
+                        .orElseThrow(() -> new RepositoryNotFoundException("Location ID not found"))
+                        .getAccommodations()));
     }
 
     @Override

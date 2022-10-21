@@ -39,7 +39,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
         Accommodation accommodation = accommodationMapper.mapToDto(accommodationRequestDto);
 
-        if(!locationService.getById(accommodationRequestDto.getLocation().getId()))
+        if(!locationService.idIsPresent(accommodationRequestDto.getLocation().getId()))
             locationService.add(accommodationRequestDto.getLocation());
 
         return accommodationMapper.mapToDto(accommodationRepository.save(accommodation));
@@ -55,7 +55,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
         accommodationRepository.findById(id).orElseThrow(() -> new RepositoryNotFoundException("Accommodation ID not found"));
 
-        if(!locationService.getById(accommodationRequestDto.getLocation().getId()))
+        if(!locationService.idIsPresent(accommodationRequestDto.getLocation().getId()))
             throw new DataIntegrityViolationException("Location ID not found");
 
         Accommodation accommodation = accommodationMapper.mapToDto(accommodationRequestDto);
@@ -89,5 +89,10 @@ public class AccommodationServiceImpl implements AccommodationService {
         }
 
         return new ArrayList<>(shuffledAccommodations);
+    }
+
+    @Override
+    public List<AccommodationResponseDto> getAccommodationsFromLocationId(Long id) {
+        return new ArrayList<>(locationService.getAccommodationsByLocationId(id));
     }
 }
