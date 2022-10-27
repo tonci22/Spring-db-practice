@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.configuration.SwaggerConfig;
 import com.example.demo.dto.request.ReservationRequestDto;
 import com.example.demo.dto.request.UserRequestDto;
 import com.example.demo.dto.request.UserUpdateRequestDto;
@@ -10,6 +11,8 @@ import com.example.demo.mapper.ReservationMapper;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.Implementation.ReservationServiceImpl;
 import com.example.demo.service.Implementation.UserServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -21,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/user")
+@Api(tags = {SwaggerConfig.USERCONTROLLERTAG})
 public class UserController {
 
     private final UserServiceImpl userService;
@@ -39,24 +43,26 @@ public class UserController {
         this.reservationService = reservationService;
     }
 
-
+    @ApiOperation("Get all Users")
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> getUsers(){
         return ResponseEntity.ok(userMapper.mapToDto(userService.getAll()));
     }
 
+    @ApiOperation("Add User")
     @PostMapping
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userCreateDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.mapToDto(userService.add(userCreateDto)));
     }
 
 
+    @ApiOperation("Update User")
     @PutMapping("{id}")
     public ResponseEntity<UserResponseDto> updateUser(@PathVariable("id") Long id, @RequestBody UserUpdateRequestDto userUpdateDto){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userMapper.mapToDto(userService.updateUser(id, userUpdateDto)));
     }
 
-
+    @ApiOperation("Delete User")
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
         userService.deleteById(id);
@@ -65,11 +71,13 @@ public class UserController {
 
 
 
+    @ApiOperation("Get all Reservations from current User")
     @GetMapping(value = "/reservations")
     public ResponseEntity<List<ReservationResponseDto>> getReservations(){
         return ResponseEntity.ok(reservationMapper.mapToDto(reservationService.getAllEntities()));
     }
 
+    @ApiOperation("Create Reservation")
     @PostMapping(value = "/{id}/reservations/{idAccommodation}")
     public ResponseEntity<UserResponseDto> createReservation(@PathVariable("id") Long id,
                                                              @PathVariable("idAccommodation") Long idAccommodation,
@@ -79,6 +87,7 @@ public class UserController {
                 mapToDto(userService.addReservation(id, idAccommodation,reservationCreateDto)));
     }
 
+    @ApiOperation("Update Reservation")
     @PutMapping("/{id}/reservations/{idReservation}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<UserResponseDto> updateReservation(@PathVariable("id") Long id, @PathVariable("idReservation") Long idReservation, @RequestBody ReservationRequestDto reservationUpdateDto){
@@ -86,6 +95,7 @@ public class UserController {
     }
 
 
+    @ApiOperation("Delete Reservation")
     @DeleteMapping("/{id}/reservations/{idReservation}")
     public ResponseEntity<String> deleteReservation(@PathVariable("id") Long id){
         reservationService.deleteById(id);

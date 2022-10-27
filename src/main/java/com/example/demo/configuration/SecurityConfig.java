@@ -54,7 +54,12 @@ public class SecurityConfig {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/login", "/register", "/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html", "/swagger-ui/**",
+                        "/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and().authenticationManager(authenticationManager)
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

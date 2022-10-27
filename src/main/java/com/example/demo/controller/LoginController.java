@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.configuration.SwaggerConfig;
 import com.example.demo.domain.JwtTokenUtil;
 import com.example.demo.dto.request.JwtRequest;
 import com.example.demo.dto.request.UserLoginRequestDto;
 import com.example.demo.dto.response.JwtResponse;
 import com.example.demo.service.Implementation.UserDetailsServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@Api(tags = {SwaggerConfig.LOGINCONTROLLERTAG})
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
@@ -32,7 +36,7 @@ public class LoginController {
         this.userDetailsService = userDetailsService;
     }
 
-
+    @ApiOperation("Create Authentication Token")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -46,6 +50,7 @@ public class LoginController {
     }
 
 
+    @ApiOperation("Register user")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserLoginRequestDto user) throws Exception {
         return ResponseEntity.ok(userDetailsService.save(user));
