@@ -14,7 +14,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Primary
 @Service
@@ -79,9 +78,19 @@ public class AccommodationServiceImpl implements AccommodationService {
     @Override
     public List<AccommodationResponseDto> getShuffledAccommodations() {
 
-        Set<AccommodationResponseDto> allAccommodations = new HashSet<>(accommodationMapper.mapToDto(accommodationRepository.findAll()));
+        Set<AccommodationResponseDto> shuffledAccommodations = new HashSet<>();
+        Random random = new Random();
 
-        return allAccommodations.stream().limit(10).distinct().collect(Collectors.toList());
+        while (shuffledAccommodations.size() < 10){
+            int randomId = random.nextInt(accommodationRepository.findAll().size());
+
+            AccommodationResponseDto randomAccommodation = accommodationMapper.mapToDto(accommodationRepository
+                    .findAll().get(randomId));
+
+            shuffledAccommodations.add(randomAccommodation);
+        }
+
+        return new ArrayList<>(shuffledAccommodations);
     }
 
     @Override

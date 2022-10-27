@@ -4,3 +4,6 @@ accommodation:
     name: nameYAML
     facebook: facebookYAML
     instagram: instagramAML
+
+jwt:
+  secret: secretAuth
